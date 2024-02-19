@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Lost and Found Dashboard</title>
+    <style>
+        /* Your existing CSS styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        section {
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #4CAF50;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .lost-item {
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            padding: 10px;
+            transition: box-shadow 0.3s ease-in-out;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .lost-item:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .remove-item-btn {
+            background-color: #f44336;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .remove-item-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .item-description,
+        .item-location,
+        .item-date,
+        .finder-info {
+            margin-top: 5px;
+            color: #333;
+        }
+
+        /* Additional styles or adjustments as needed */
+
+        .real-time-update,
+        footer {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Welcome to Your Lost and Found Dashboard</h1>
+    </header>
+
+    <main>
+
+        <section id="realTimeUpdates" class="real-time-update">
+            <h2>Real-Time Updates</h2>
+            <ul id="updateList"></ul>
+        </section>
+
+        <section id="summaryStatistics">
+            <h2>Summary Statistics</h2>
+            <p>Total Reported Lost Items: <span id="totalLostItems" style="color: #4CAF50; font-weight: bold;">0</span></p>
+            <p>Total Found Items: <span id="totalFoundItems" style="color: #4CAF50; font-weight: bold;">0</span></p>
+        </section>
+
+        
+        <section class="lost-items">
+            <h2>Lost Items</h2>
+            <ul id="lostItemList" class="item"></ul>
+        </section>
+
+
+        <section class="found-items">
+            <h2>Found Items</h2>
+            <ul id="foundItemList" class="item"></ul>
+        </section>
+
+        <div id="itemsContainer"></div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Lost and Found System</p>
+    </footer>
+
+    <script src="dashboard.js"></script>
+    <script src="script.js"></script>
+    <script src="client.js"></script>
+
+</body>
+</html>

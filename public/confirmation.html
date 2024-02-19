@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .confirmation-container {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #555;
+        }
+
+        .confirmation-details {
+            margin-top: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        strong {
+            color: #4CAF50;
+        }
+
+        .additional-actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .additional-actions a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            transition: background-color 0.3s;
+        }
+
+        .additional-actions a:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <title>Lost Item Reported - Confirmation</title>
+
+</head>
+<body>
+    <div class="confirmation-container">
+        <h1>Lost Item Reported Successfully</h1>
+        <p>Thank you for contributing to our lost and found system.</p>
+        
+        <!-- Display confirmation details -->
+        
+    <div class="confirmation-details">
+        <h2>Reported Item Details</h2>
+        <p><strong>Description:</strong> [Item Description]</p>
+        <p><strong>Location Found:</strong> [Location]</p>
+        <p><strong>Date Found:</strong> [Date]</p>
+    </div>
+
+
+        <!-- Additional actions or links -->
+        <div class="additional-actions">
+            <a href="/dashboard">Return to Dashboard</a>
+            <a href="/index">Report Another Item</a>
+        </div>
+
+        <!-- Include the script for updating confirmation details -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Extract item details from the URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const itemDescription = urlParams.get('description') || '[Item Description]';
+                const itemLocation = urlParams.get('location') || '[Location]';
+                const itemDate = urlParams.get('date') || '[Date]';
+        
+                // Log the received parameters to the console for debugging
+                console.log('Item Description:', itemDescription);
+                console.log('Item Location:', itemLocation);
+                console.log('Item Date:', itemDate);
+        
+                // Update the HTML content with the actual item details
+                const confirmationDetails = document.querySelector('.confirmation-details');
+        confirmationDetails.innerHTML = `
+            <h2>Reported Item Details</h2>
+            <p><strong>Description:</strong> ${itemDescription}</p>
+            <p><strong>Location:</strong> ${itemLocation}</p>
+            <p><strong>Date:</strong> ${itemDate}</p>
+        `;
+            });
+        </script>
+        
+    </div>
+</body>
+</html>

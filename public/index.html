@@ -1,0 +1,205 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+   
+
+    <style>
+        body {
+            background-color: #f8f8f8;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            
+        }
+    
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+    
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+    
+        h1, h2, h3 {
+            color: #333;
+        }
+    
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+    
+        button:hover {
+            background-color: #45a049;
+        }
+    
+        form {
+            margin-top: 20px;
+        }
+    
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+    
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+    
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+    
+        li {
+            margin-bottom: 10px;
+        }
+    
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    
+        #notificationsSection,
+        #realTimeUpdatesSection,
+        #categoriesSection {
+            display: none; /* Hide sections related to found items */
+        }
+    
+        #viewCategories, #addCategory {
+            margin-top: 20px;
+        }
+    </style>
+    
+    <title>Lost and Found System</title>
+</head>
+<body>
+    <header>
+        <h1>Lost and Found System</h1>
+    
+        <!-- User Authentication -->
+        <section id="authenticationSection">
+            <!-- Display user information when authenticated -->
+            <div id="userInformation" style="display: none;">
+                <p>Welcome, <span id="usernameDisplay"></span>! (User ID: <span id="userIdDisplay"></span>)</p>
+                <button id="logoutButton">Logout</button>
+            </div>
+        </section>
+    </header>
+    
+    <main>
+        <section id="lostFormSection">
+            <h2>Report Lost Item</h2>
+            <form action="/reportLostItem" method="POST" id="lostItemForm">
+                <!-- Inside the Report Lost Item form -->
+                <label for="lostCategory">Category:</label>
+                <select id="lostCategory" name="lostCategory" required>
+                    <!-- Options can be dynamically populated based on available categories -->
+                    <!-- For now, let's include a couple of example categories -->
+                    <option value="electronics">Electronics</option>
+                    <option value="accessories">Accessories</option>
+                    <option value="others">Others</option>
+                </select>
+
+                <!-- Make sure the form elements are nested inside the form -->
+                <label for="lostDescription">Description:</label>
+                <input type="text" id="lostDescription" name="lostDescription" required>
+        
+                <label for="lostLocation">Location:</label>
+                <input type="text" id="lostLocation" name="lostLocation" required>
+        
+                <label for="lostDate">Date:</label>
+                <input type="date" id="lostDate" name="lostDate" required>
+        
+                <button type="submit">Report Lost Item</button>
+            </form>
+        </section>
+    
+        <section id="foundFormSection">
+            <h2>Report Found Item</h2>
+            <form id="foundItemForm" method="post"  action="/reportFoundItem">
+                <!-- Removed category-related elements for found items -->
+                <label for="foundDescription">Description:</label>
+                <input type="text" id="foundDescription" name="foundDescription" required>
+
+                <label for="foundLocation">Location Found:</label>
+                <input type="text" id="foundLocation" name="foundLocation" required>
+
+                <label for="foundDate">Date Found:</label>
+                <input type="date" id="foundDate" name="foundDate" required>
+                 
+                <label for="finderInfo">Finder Information:</label>
+                <input type="text" id="finderInfo" name="finderInfo" required placeholder="Enter your contact information "> 
+
+                <button type="submit">Report Found Item</button>
+            </form>
+        </section>
+    
+        <section id="categoriesSection">
+            <h2>Categories</h2>
+            
+            <section id="viewCategories">
+                <h3>View Categories</h3>
+                <ul id="categoryList">
+                    <!-- Example category -->
+                    <li>Category: Electronics</li>
+                </ul>
+            </section>
+    
+            <section id="addCategory">
+                <h3>Add New Category</h3>
+                <form id="categoryForm">
+                    <label for="categoryName">Category Name:</label>
+                    <input type="text" id="categoryName" name="categoryName" required>
+
+                    <label for="categoryDescription">Description:</label>
+                    <input type="text" id="categoryDescription" name="categoryDescription">
+
+                    <button type="submit">Add Category</button>
+                </form>
+            </section>
+        </section>
+        
+        <a href="dashboard.html" style="margin-left: auto; display: block; text-align: right; margin-bottom: 20px;">
+            <button>Go to Dashboard</button>
+        </a>
+        
+    </main>
+                        
+    <footer>
+        <p>&copy; 2024 Lost and Found System</p>
+    </footer>
+
+    <!-- Script for authentication and main page interactions -->
+    <script src="script.js"></script>
+
+<script src="client.js"></script>
+
+</body>
+</html

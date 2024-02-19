@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="script.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Login or Register</title>
+    <style>
+        body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to right, #3498db, #2c3e50);
+}
+
+.login-register-container {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    width: 80%; /* Adjust the width */
+    max-width: 400px; /* Limit the maximum width */
+    color: #333;
+    backdrop-filter: blur(10px);
+}
+
+
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #000; /* Change text color to black for better visibility */
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #00cc99;
+            transform: scale(1.05);
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            background-color: #fff; /* Add a background color to the links */
+            padding: 5px 10px; /* Add padding for better visibility */
+            border-radius: 4px; /* Optional: Add border-radius for a rounded look */
+            display: inline-block; /* Ensure the background color covers the entire link */
+        }
+
+        a:hover {
+            text-decoration: underline;
+            background-color: #f0f0f0; /* Change the background color on hover if needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-register-container" id="loginSection">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required placeholder="Enter your username">
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required placeholder="Enter your password">
+            <div id="errorMessage" class="hidden"></div>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="#" id="showRegister">Register here</a></p>
+    </div>
+
+    <div class="login-register-container" id="registerSection" style="display: none;">
+        <h2>Register</h2>
+        <form id='registerForm'>
+            <label for="regUsername">Username:</label>
+            <input type="text" id="regUsername" name="username" required placeholder="Enter your username">
+
+            <label for="regPassword">Password:</label>
+            <input type="password" id="regPassword" name="password" required placeholder="Enter your password">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email">
+
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="#" id="showLogin">Login here</a></p>
+    </div>
+
+    <script defer src="auth.js"></script>
+    <script>
+        function showErrorMessage(message) {
+            const errorMessageContainer = document.getElementById('errorMessage');
+            errorMessageContainer.textContent = message;
+            errorMessageContainer.style.display = 'block';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginSection = document.getElementById('loginSection');
+            const registerSection = document.getElementById('registerSection');
+            const showRegisterLink = document.getElementById('showRegister');
+            const showLoginLink = document.getElementById('showLogin');
+
+            showRegisterLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                loginSection.style.display = 'none';
+                registerSection.style.display = 'block';
+            });
+
+            showLoginLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                loginSection.style.display = 'block';
+                registerSection.style.display = 'none';
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.getElementById('registerForm');
+
+            registerForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the form from being submitted
+
+                const regUsername = document.getElementById('regUsername').value.trim();
+                const regPassword = document.getElementById('regPassword').value.trim();
+                const email = document.getElementById('email').value.trim();
+
+                if (regUsername === '' || regPassword === '' || email === '') {
+                    showErrorMessage('Please fill in all the required fields.');
+                    return;
+                }
+
+                // Send the registration data to the server
+                fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: regUsername,
+                        password: regPassword,
+                        email: email
+                    })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Registration successful
+                        return response.json();
+                    } else {
+                        // Registration failed
+                        throw new Error('Registration failed');
+                    }
+                })
+                .then(data => {
+                    // Handle successful registration
+                    console.log('Registration successful:', data);
+                    // Optionally, you can redirect the user to a confirmation page or login page
+                })
+                .catch(error => {
+                    // Handle registration error
+                    console.error('Error during registration:', error);
+                    showErrorMessage('Registration failed. Please try again later.');
+                });
+            });
+        });
+
+    </script>
+    <script src="/script.js"></script>
+    <script src="client.js"></script>
+
+</body>
+</html>
